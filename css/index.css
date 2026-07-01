@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-body: Manrope, sans-serif;
+    --color-body: #050816;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-body);
+    color: #fff;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+
+    display: flex;
+    justify-content: center;
+    /* centraliza a nav na tela */
+    align-items: center;
+
+    padding: 1.5rem 2rem;
+
+    backdrop-filter: blur(8px);
+}
+
+main {
+    padding-top: 80px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+
+nav ul li:hover {
+    text-decoration: underline;
+    text-decoration-color: #7e5bbb;
+    text-underline-offset: 0.3rem;
+    text-decoration-thickness: 0.2rem;
+    text-shadow: #ffffff94 0 0 5px;
+
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    nav ul {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    header {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul {
+        gap: 0.8rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Roda pé */
+footer {
+    position: relative;
+    top: 750px;
+    padding: 3rem;
+    opacity: .50;
+    user-select: none;
+
+}
