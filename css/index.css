@@ -9,10 +9,54 @@
     --color-body: #050816;
 }
 
+/* ===============Corpo================ */
 body {
     font-family: var(--font-body);
     background-color: var(--color-body);
     color: #fff;
+}
+
+section {
+    padding: 4rem 2rem;
+    position: relative;
+    scroll-margin-top: 100px;
+    /* ajuda pq ficava passando da section, pq tinha a nav,
+     dai agora ele coloca bem certinho onde era para ficar.
+     Isso diz ao navegador:
+     "quando rolar até aqui via âncora, pare com uma folga de 100px no topo"
+      — daí o conteúdo não fica escondido atrás do header. */
+}
+
+section:not(:last-of-type)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    max-width: 900px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #7e5bbb, transparent);
+}
+
+/* Seções que ainda não têm conteúdo real (marcadas manualmente no HTML) */
+section.placeholder {
+    display: none;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    color: #7e5bbb;
+    font-weight: 700;
+    position: fixed;
+    top: 1.5rem;
+    left: 2rem;
+    z-index: 100;
+    transition: color 0.5s ease;
+}
+
+.logo h1:hover {
+    color: #ff00bf;
 }
 
 header {
@@ -57,10 +101,127 @@ nav ul li:hover {
     text-underline-offset: 0.3rem;
     text-decoration-thickness: 0.2rem;
     text-shadow: #ffffff94 0 0 5px;
-
 }
 
-/* Responsivo */
+.hero-content {
+    margin-top: 10rem;
+    margin-left: 5rem;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    width: 30%;
+}
+
+.hero-content h1 .building {
+    color: #4aece9;
+    transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+.hero-content .building:hover {
+    color: #7e5bbb;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    width: 30%;
+    margin-top: 1.6rem;
+    opacity: .50;
+}
+
+.hero-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ---------- BOTÃO PRIMÁRIO (simples, sem pseudo-elementos) ---------- */
+
+.btn-primary {
+    background-color: #5931e9;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #4321c9;
+}
+
+/* ---------- BOTÃO SECUNDÁRIO (com borda giratória) ---------- */
+
+.btn-secondary {
+    position: relative;
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: conic-gradient(transparent,
+            transparent,
+            transparent,
+            #7f23ff);
+    animation: rotate 3s linear infinite;
+    z-index: -2;
+}
+
+.btn-secondary::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 6px;
+    background: #050816;
+    /* mesma cor do body, deixa a borda "vazada" */
+    z-index: -1;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover::after {
+    background: #5931e9;
+    /* preenche de roxo sólido no hover */
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #5931e9;
+    border: 2px solid #5931e9;
+}
+
+.btn-secondary:hover {
+    background-color: #5931e9;
+    color: #ffffff;
+}
+
+/* ============================================ */
+/* Responsivo- deixa a nav responsiva */
 @media (max-width: 768px) {
     nav ul {
         gap: 1.2rem;
@@ -80,12 +241,73 @@ nav ul li:hover {
     }
 }
 
+
+/* ======================contato==================== */
+#contact {
+    display: flex;
+
+}
+
+#contact .contact-heading {
+
+    font-size: 0.9rem;
+    width: 23%;
+
+    color: #7e5bbb;
+}
+
+#contact .contact-subheading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    background-color: #7e5bbb;
+    border-radius: 0.5rem;
+    height: 18rem;
+    width: 25%;
+    font-size: 1.5rem;
+    padding: 1rem;
+    top: 1rem;
+
+
+}
+
+#contact .contact-subheading a {
+    text-decoration: none;
+   
+    color: #ffffff;
+    background-color: #f3f1f7;
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    color: #7e5bbb;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+
+
+}
+#contact .contact-subheading a:hover {
+    background-color: #ff0d0d;
+}
+
+/* ================================================= */
 /* Roda pé */
+footer div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 footer {
     position: relative;
-    top: 750px;
+    min-width: 80%;
     padding: 3rem;
     opacity: .50;
     user-select: none;
+
+}
+
+.developed-by {
+    position: relative;
+    margin-left: auto;
 
 }
