@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-body: Manrope, sans-serif;
+    --color-body: #04050e;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-body);
+    color: #fff;
+}
+
+main {
+    padding-top: 80px;
+}
+
+/* ====================nav=========================== */
+
+.logo h1 {
+    font-size: 1.5rem;
+    color: #7e5bbb;
+    font-weight: 700;
+    position: fixed;
+    top: 1.5rem;
+    left: 2rem;
+    z-index: 100;
+    transition: color 0.5s ease;
+}
+
+.logo h1:hover {
+    color: #a00a50;
+}
+
+nav {
+    position: fixed;       
+    top: 1.5rem;            
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;           
+}
+
+nav ul {
+
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #d6cbcb;
+
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+
+nav ul li:hover {
+    text-decoration: underline;
+    text-decoration-color: #7e5bbb;
+    text-underline-offset: 0.3rem;
+    text-decoration-thickness: 0.2rem;
+    text-shadow: #ffffff94 0 0 5px;
+
+}
+
+/* ======================cara do fundo=========================== */
+
+
+.Homem-do-Fundo {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.Homem-do-Fundo img {
+    height: 770px;
+    width: auto;
+    display: block;
+}
+
+/* ============================sol vermelho=========================== */
+.sol-vermelho {
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.sol-vermelho img {
+    height: 1070px;
+    width: auto;
+    display: block;
+
+    
+
+    filter: hue-rotate(100deg) saturate(120%) brightness(130%) drop-shadow(0 0 400px #ff0000)
+            drop-shadow(0 0 120px #ff000060);
+    /* hue-rotate gira as cores da imagem — 200deg transforma o roxo/magenta em vermelho.
+       saturate aumenta a intensidade da cor. Ajuste os valores até chegar no vermelho que quer */
+}
