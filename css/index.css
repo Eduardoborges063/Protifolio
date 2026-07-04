@@ -44,6 +44,127 @@ section.placeholder {
     display: none;
 }
 
+#home {
+    position: relative;
+    min-height: 800px;    /* garante espaço suficiente pra não vazar pro About */
+}
+
+.hero-visual {
+    position: absolute;
+    top: 100px;
+    right: 2rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    width: 450px;
+    height: 620px;
+    flex-shrink: 0;
+}
+
+.Homem-do-Fundo {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.Homem-do-Fundo img {
+    height: 770px;
+    width: auto;
+    display: block;
+}
+
+.sol-roxo {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.sol-roxo img {
+    width: 730px;
+    height: auto;
+    display: block;
+}
+
+/* Agrupa as duas caixas (Code + nova) numa coluna */
+.hero-boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 20px;
+}
+
+.ladoD {
+    background-color: rgba(248, 248, 248, 0.027);
+    min-width: 400px;
+    min-height: 300px;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+
+.ladoD h1 {
+    margin: 25px;
+}
+
+.ladoD,
+p {
+    margin: 25px;
+    line-height: 2rem;
+    font-size: 1.2rem;
+
+}
+
+.ladoD p samp {
+    color: rgb(255, 145, 0);
+    transition: color 1.2s;
+}
+
+.ladoD p samp:hover {
+    color: red;
+   
+}
+
+.ladoD2 {
+    background-color: rgba(248, 248, 248, 0.027);
+    min-width: 400px;
+    min-height: 150px;
+    border-radius: 20px;
+    padding: 25px;
+    flex-shrink: 0;
+}
+
+.Neuro {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+.Neuro-text h1 {
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+    margin-top: -110px;
+}
+.Neuro-text p {
+    font-size: 0.9rem;
+    opacity: 0.6;
+    margin: 0;
+}
+.Neuro img {
+    width: 300px;
+    height: 250px;
+    border-radius: 12px;
+    object-fit: cover;      /* corta a imagem pra caber no quadrado sem esticar */
+    flex-shrink: 0;
+}
+
 .logo h1 {
     font-size: 1.5rem;
     color: #7e5bbb;
@@ -56,7 +177,38 @@ section.placeholder {
 }
 
 .logo h1:hover {
-    color: #ff00bf;
+    color: #a00a50;
+}
+
+.hero-technologies {
+    margin-top: 2rem;
+    margin-left: 5rem;
+}
+
+.hero-technologies h3 {
+    font-size: 1.2rem;
+}
+
+.hero-technologies-icons {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.hero-technologies-icons img {
+    min-width: 40px;
+    height: 40px;
+    margin-right: 20px;
+}
+
+.hero-technologies-icons .github-img {
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.hero-technologies-icons img:hover {
+    transform: scale(1.5);
+    transition: transform 0.5s ease;
 }
 
 header {
@@ -154,10 +306,11 @@ nav ul li:hover {
     background-color: #5931e9;
     color: #ffffff;
     border: none;
+    transition: 1s;
 }
 
 .btn-primary:hover {
-    background-color: #4321c9;
+    background-color: #6d0837;
 }
 
 /* ---------- BOTÃO SECUNDÁRIO (com borda giratória) ---------- */
@@ -261,30 +414,60 @@ nav ul li:hover {
     flex-direction: column;
     align-items: flex-start;
 
-    background-color: #7e5bbb;
+    /* box */
+
     border-radius: 0.5rem;
     height: 18rem;
     width: 25%;
-    font-size: 1.5rem;
+
+    font-size: 1rem;
     padding: 1rem;
     top: 1rem;
 
 
 }
 
+#contact img {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+
+
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+}
+
+.git-img img {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+}
+
+.contact-icons img:hover {
+    transform: scale(1.1);
+}
+
 #contact .contact-subheading a {
     text-decoration: none;
-   
-    color: #ffffff;
-    background-color: #f3f1f7;
     padding: 0.5rem 1rem;
+
     border-radius: 0.4rem;
     color: #7e5bbb;
     font-size: 1rem;
     transition: background-color 0.3s ease;
 
 
+
 }
+
 #contact .contact-subheading a:hover {
     background-color: #ff0d0d;
 }
