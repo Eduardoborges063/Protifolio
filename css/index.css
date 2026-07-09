@@ -7,6 +7,9 @@
 :root {
     --font-body: Manrope, sans-serif;
     --color-body: #050816;
+    --color-primary: #5931e9;
+    --color-accent: #7e5bbb;
+    --color-red:#ff0d0d;
 }
 
 /* ===============Corpo================ */
@@ -14,17 +17,15 @@ body {
     font-family: var(--font-body);
     background-color: var(--color-body);
     color: #fff;
+    overflow-x: hidden;
+    /* evita scroll horizontal causado por elementos absolute/tamanhos fixos */
 }
 
 section {
     padding: 4rem 2rem;
     position: relative;
     scroll-margin-top: 100px;
-    /* ajuda pq ficava passando da section, pq tinha a nav,
-     dai agora ele coloca bem certinho onde era para ficar.
-     Isso diz ao navegador:
-     "quando rolar até aqui via âncora, pare com uma folga de 100px no topo"
-      — daí o conteúdo não fica escondido atrás do header. */
+    /* compensa a altura do header fixo ao navegar por âncora */
 }
 
 section:not(:last-of-type)::after {
@@ -39,21 +40,20 @@ section:not(:last-of-type)::after {
     background: linear-gradient(to right, transparent, #7e5bbb, transparent);
 }
 
-/* Seções que ainda não têm conteúdo real (marcadas manualmente no HTML) */
 section.placeholder {
     display: none;
 }
 
+/* ======================Home / Hero ================== */
 #home {
     position: relative;
-    min-height: 800px;    /* garante espaço suficiente pra não vazar pro About */
+    min-height: 800px;
 }
 
 .hero-visual {
     position: absolute;
     top: 100px;
     right: 2rem;
-
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -95,7 +95,6 @@ section.placeholder {
     display: block;
 }
 
-/* Agrupa as duas caixas (Code + nova) numa coluna */
 .hero-boxes {
     display: flex;
     flex-direction: column;
@@ -105,8 +104,7 @@ section.placeholder {
 
 .ladoD {
     background-color: rgba(248, 248, 248, 0.027);
-    min-width: 400px;
-    min-height: 300px;
+    min-width: 97%;
     border-radius: 20px;
     flex-shrink: 0;
 }
@@ -115,12 +113,12 @@ section.placeholder {
     margin: 25px;
 }
 
-.ladoD,
-p {
+/* CORRIGIDO: era ".ladoD, p" (afetava TODO <p> do site). Agora é ".ladoD p"
+   (só afeta <p> que estão dentro de .ladoD) */
+.ladoD p {
     margin: 25px;
     line-height: 2rem;
     font-size: 1.2rem;
-
 }
 
 .ladoD p samp {
@@ -129,14 +127,11 @@ p {
 }
 
 .ladoD p samp:hover {
-    color: red;
-   
+    color:var(--color-red)
 }
 
 .ladoD2 {
     background-color: rgba(248, 248, 248, 0.027);
-    min-width: 400px;
-    min-height: 150px;
     border-radius: 20px;
     padding: 25px;
     flex-shrink: 0;
@@ -146,22 +141,26 @@ p {
     display: flex;
     align-items: center;
     gap: 1.2rem;
+    flex-wrap: wrap;
 }
+
 .Neuro-text h1 {
     font-size: 1.3rem;
     margin-bottom: 6px;
-    margin-top: -110px;
 }
+
 .Neuro-text p {
     font-size: 0.9rem;
     opacity: 0.6;
     margin: 0;
 }
+
 .Neuro img {
-    width: 300px;
+    width: 100%;
+    max-width: 220px;
     height: 250px;
     border-radius: 12px;
-    object-fit: cover;      /* corta a imagem pra caber no quadrado sem esticar */
+    object-fit: cover;
     flex-shrink: 0;
 }
 
@@ -191,13 +190,14 @@ p {
 
 .hero-technologies-icons {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     margin-top: 1rem;
 }
 
 .hero-technologies-icons img {
-    min-width: 40px;
-    height: 40px;
+    max-width: 100%;
+    height: 50%;
     margin-right: 20px;
 }
 
@@ -211,6 +211,7 @@ p {
     transition: transform 0.5s ease;
 }
 
+/* ======================Header / Nav================== */
 header {
     position: fixed;
     top: 0;
@@ -218,14 +219,10 @@ header {
     width: 100%;
     z-index: 100;
     font-size: 25px;
-
     display: flex;
     justify-content: center;
-    /* centraliza a nav na tela */
     align-items: center;
-
     padding: 1.5rem 2rem;
-
     backdrop-filter: blur(8px);
 }
 
@@ -242,7 +239,6 @@ nav ul {
 nav ul li a {
     text-decoration: none;
     color: #fff;
-
     cursor: pointer;
     transition: color 0.5s ease;
 }
@@ -271,7 +267,7 @@ nav ul li:hover {
 }
 
 .hero-content .building:hover {
-    color: #7e5bbb;
+    color: var(--color-accent);
 }
 
 .hero-content p {
@@ -284,6 +280,7 @@ nav ul li:hover {
 .hero-buttons {
     margin-top: 2rem;
     display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
 }
 
@@ -300,8 +297,7 @@ nav ul li:hover {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ---------- BOTÃO PRIMÁRIO (simples, sem pseudo-elementos) ---------- */
-
+/* ---------- BOTÃO PRIMÁRIO ---------- */
 .btn-primary {
     background-color: #5931e9;
     color: #ffffff;
@@ -313,25 +309,28 @@ nav ul li:hover {
     background-color: #6d0837;
 }
 
-/* ---------- BOTÃO SECUNDÁRIO (com borda giratória) ---------- */
-
+/* ---------- BOTÃO SECUNDÁRIO (borda giratória) ----------
+   OBS: antes essa regra estava duplicada no arquivo (duas .btn-secondary
+   diferentes brigando pelas mesmas propriedades). Mesclei em uma só. */
 .btn-secondary {
     position: relative;
     background-color: transparent;
-    color: #ffffff;
-    border: none;
+    color: #5931e9;
+    border: 2px solid #5931e9;
     overflow: hidden;
     z-index: 1;
+}
+
+.btn-secondary:hover {
+    background-color: #5931e9;
+    color: #ffffff;
 }
 
 .btn-secondary::before {
     content: '';
     position: absolute;
     inset: -50%;
-    background: conic-gradient(transparent,
-            transparent,
-            transparent,
-            #7f23ff);
+    background: conic-gradient(transparent, transparent, transparent, #7f23ff);
     animation: rotate 3s linear infinite;
     z-index: -2;
 }
@@ -342,14 +341,12 @@ nav ul li:hover {
     inset: 2px;
     border-radius: 6px;
     background: #050816;
-    /* mesma cor do body, deixa a borda "vazada" */
     z-index: -1;
     transition: background-color 0.3s ease;
 }
 
 .btn-secondary:hover::after {
     background: #5931e9;
-    /* preenche de roxo sólido no hover */
 }
 
 @keyframes rotate {
@@ -362,50 +359,134 @@ nav ul li:hover {
     }
 }
 
-.btn-secondary {
-    background-color: transparent;
+/* ======================about me ================== */
+.About {
+    text-transform: uppercase;
+    font-size: 0.8rem;
     color: #5931e9;
-    border: 2px solid #5931e9;
 }
 
-.btn-secondary:hover {
-    background-color: #5931e9;
-    color: #ffffff;
+.about-description{
+    width: 20%;
+    margin: 2rem;
 }
 
-/* ============================================ */
-/* Responsivo- deixa a nav responsiva */
-@media (max-width: 768px) {
-    nav ul {
-        gap: 1.2rem;
-        flex-wrap: wrap;
-        justify-content: center;
+.my-esperience {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 40%;
+    margin: 0 auto;
+}
+
+/* aqui é a mágica: estiliza os divs filhos direto, sem precisar de classe nova */
+.my-esperience > div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #171f38;
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+}
+
+.my-esperience img {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    box-sizing: border-box;
+    background-color: var(--color-accent);
+    border-radius: 10px;
+}
+
+.my-esperience h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.my-esperience h3 {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #9aa1b9;
+    text-transform: none;
+}
+
+/* =====================skills===================== */
+#skills {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+#skills h1 {
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+.Technologies {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 60px;
+    max-width: 1300px;   /* era 900px, aumentei */
+    width: 90%;          /* usa 90% da largura da tela também */
+    margin: 0 auto;
+    text-align: left;
+}
+
+.skill-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.skill-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.skill-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    flex: 1;
+}
+
+.skill-percent {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.skill-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7f5af0, #ff5edf);
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+@media (max-width: 700px) {
+    .Technologies {
+        grid-template-columns: 1fr;
     }
-
-    header {
-        padding: 1rem;
-    }
 }
-
-@media (max-width: 480px) {
-    nav ul {
-        gap: 0.8rem;
-        font-size: 0.85rem;
-    }
-}
-
 
 /* ======================contato==================== */
 #contact {
     display: flex;
-
+    flex-wrap: wrap;
+    gap: 2rem;
 }
 
 #contact .contact-heading {
-
     font-size: 0.9rem;
     width: 23%;
-
     color: #7e5bbb;
 }
 
@@ -413,26 +494,14 @@ nav ul li:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
-    /* box */
-
     border-radius: 0.5rem;
     height: 18rem;
     width: 25%;
-
     font-size: 1rem;
     padding: 1rem;
-    top: 1rem;
-
-
 }
 
 #contact img {
-    display: flex;
-    flex-direction: row;
-    gap: 0.8rem;
-
-
     border-radius: 50%;
     width: 2rem;
     height: 2rem;
@@ -440,10 +509,6 @@ nav ul li:hover {
 }
 
 .git-img img {
-    display: flex;
-    flex-direction: row;
-    gap: 0.8rem;
-
     background-color: #ffffff;
     border-radius: 50%;
     width: 2rem;
@@ -458,14 +523,10 @@ nav ul li:hover {
 #contact .contact-subheading a {
     text-decoration: none;
     padding: 0.5rem 1rem;
-
     border-radius: 0.4rem;
     color: #7e5bbb;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-
-
-
 }
 
 #contact .contact-subheading a:hover {
@@ -476,21 +537,159 @@ nav ul li:hover {
 /* Roda pé */
 footer div {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
 }
 
 footer {
     position: relative;
-    min-width: 80%;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
     padding: 3rem;
     opacity: .50;
     user-select: none;
-
 }
 
 .developed-by {
-    position: relative;
     margin-left: auto;
+}
 
+/* ================================================= */
+/* =================  RESPONSIVO  ================= */
+/* ================================================= */
+
+@media (max-width: 1024px) {
+    .hero-visual {
+        right: 1rem;
+    }
+
+    .hero-image-wrapper {
+        width: 350px;
+        height: 480px;
+    }
+
+    .Homem-do-Fundo img {
+        height: 600px;
+    }
+
+    .sol-roxo img {
+        width: 560px;
+    }
+
+    .my-esperience {
+        max-width: 60%;
+    }
+}
+
+@media (max-width: 900px) {
+    #home {
+        min-height: auto;
+        padding-bottom: 3rem;
+    }
+
+    .hero-visual {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-top: 2rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-content,
+    .hero-technologies {
+        margin-left: 2rem;
+    }
+
+    .hero-content h1,
+    .hero-content p {
+        width: 70%;
+    }
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    header {
+        padding: 1rem;
+    }
+
+    #contact .contact-heading,
+    #contact .contact-subheading {
+        width: 100%;
+    }
+
+    #contact .contact-subheading {
+        height: auto;
+    }
+
+    .my-esperience {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    .my-esperience {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+    }
+
+    .hero-content {
+        margin-top: 6rem;
+        margin-left: 1.5rem;
+    }
+
+    .hero-content h1,
+    .hero-content p {
+        width: 100%;
+    }
+
+    .hero-technologies {
+        margin-left: 1.5rem;
+    }
+
+    .hero-image-wrapper {
+        width: 260px;
+        height: 360px;
+    }
+
+    .Homem-do-Fundo img {
+        height: 430px;
+    }
+
+    .sol-roxo img {
+        width: 400px;
+    }
+
+    .logo h1 {
+        font-size: 1.1rem;
+        top: 1rem;
+        left: 1rem;
+    }
+
+    footer {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul {
+        gap: 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
 }

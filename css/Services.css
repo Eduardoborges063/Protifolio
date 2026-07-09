@@ -125,24 +125,24 @@ nav ul li:hover {
 
     
 
-    filter: hue-rotate(100deg) saturate(120%) brightness(130%) drop-shadow(0 0 400px #ff0000)
-            drop-shadow(0 0 120px #ff000060);
+    filter: hue-rotate(620deg) saturate(240%) brightness(120%) drop-shadow(0 0 400px #31f1ff)
+            drop-shadow(0 0 120px #3ea5fa60);
     /* hue-rotate gira as cores da imagem — 200deg transforma o roxo/magenta em vermelho.
        saturate aumenta a intensidade da cor. Ajuste os valores até chegar no vermelho que quer */
 }
 /* ======================================main==================================================== */
-.Good-job{
+.Good-Services{
     position: relative;
     top: 7rem;
     margin-left: 6rem;
     min-width: 480px;
     max-width: 490px;
 }
-.Good-job h3{
+.Good-Services h3{
     font-size: 35px;
     transition: 1.5s;
 }
-.Good-job h3 :hover{
+.Good-Services h3 :hover{
     color: #ff0000;
     text-shadow: 2px 3px rgb(43, 40, 40);
 }
