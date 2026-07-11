@@ -32,7 +32,6 @@ main {
     transition: color 0.5s ease;
     
 }
-
 .logo h1:hover {
       color: #7e5bbb;
 }
@@ -54,7 +53,6 @@ header {
 
     backdrop-filter: blur(8px);
 }
-
 nav {
     font-size: 1.5rem;
     position: fixed;       
@@ -66,7 +64,6 @@ nav {
     align-items: center;
     z-index: 100;           
 }
-
 nav ul {
 
     display: flex;
@@ -74,7 +71,6 @@ nav ul {
     gap: 2.5rem;
 
 }
-
 nav ul li a {
     text-decoration: none;
     color: #d6cbcb;
@@ -82,7 +78,6 @@ nav ul li a {
     cursor: pointer;
     transition: color 0.5s ease;
 }
-
 nav ul li:hover {
     text-decoration: underline;
     text-decoration-color: #7e5bbb;
@@ -90,45 +85,6 @@ nav ul li:hover {
     text-decoration-thickness: 0.2rem;
     text-shadow: #ffffff94 0 0 5px;
 
-}
-
-/* ======================cara do fundo=========================== */
-
-
-.Homem-do-Fundo {
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-}
-
-.Homem-do-Fundo img {
-    height: 770px;
-    width: auto;
-    display: block;
-}
-
-/* ============================sol vermelho=========================== */
-.sol-vermelho {
-    position: absolute;
-    top: 40%;
-    left: 45%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-
-.sol-vermelho img {
-    height: 1070px;
-    width: auto;
-    display: block;
-
-    
-
-    filter: hue-rotate(620deg) saturate(240%) brightness(120%) drop-shadow(0 0 400px #31f1ff)
-            drop-shadow(0 0 120px #3ea5fa60);
-    /* hue-rotate gira as cores da imagem — 200deg transforma o roxo/magenta em vermelho.
-       saturate aumenta a intensidade da cor. Ajuste os valores até chegar no vermelho que quer */
 }
 /* ======================================main==================================================== */
 .Good-Services{

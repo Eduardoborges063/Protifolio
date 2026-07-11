@@ -9,23 +9,23 @@
     --color-body: #050816;
     --color-primary: #5931e9;
     --color-accent: #7e5bbb;
-    --color-red:#ff0d0d;
+    --color-red: #ff0d0d;
+    --color-blue: #43bff0;
+    --color-white: #ffffff;
 }
 
 /* ===============Corpo================ */
 body {
     font-family: var(--font-body);
     background-color: var(--color-body);
-    color: #fff;
+    color: var(--color-white);
     overflow-x: hidden;
-    /* evita scroll horizontal causado por elementos absolute/tamanhos fixos */
 }
 
 section {
     padding: 4rem 2rem;
     position: relative;
     scroll-margin-top: 100px;
-    /* compensa a altura do header fixo ao navegar por âncora */
 }
 
 section:not(:last-of-type)::after {
@@ -113,8 +113,6 @@ section.placeholder {
     margin: 25px;
 }
 
-/* CORRIGIDO: era ".ladoD, p" (afetava TODO <p> do site). Agora é ".ladoD p"
-   (só afeta <p> que estão dentro de .ladoD) */
 .ladoD p {
     margin: 25px;
     line-height: 2rem;
@@ -127,7 +125,7 @@ section.placeholder {
 }
 
 .ladoD p samp:hover {
-    color:var(--color-red)
+    color: var(--color-red)
 }
 
 .ladoD2 {
@@ -166,7 +164,7 @@ section.placeholder {
 
 .logo h1 {
     font-size: 1.5rem;
-    color: #7e5bbb;
+    color: var(--color-accent);
     font-weight: 700;
     position: fixed;
     top: 1.5rem;
@@ -202,7 +200,7 @@ section.placeholder {
 }
 
 .hero-technologies-icons .github-img {
-  width: 3%;
+    width: 3%;
 }
 
 .hero-technologies-icons img:hover {
@@ -237,14 +235,14 @@ nav ul {
 
 nav ul li a {
     text-decoration: none;
-    color: #fff;
+    color: var(--color-white);
     cursor: pointer;
     transition: color 0.5s ease;
 }
 
 nav ul li:hover {
     text-decoration: underline;
-    text-decoration-color: #7e5bbb;
+    text-decoration-color: var(--color-accent);
     text-underline-offset: 0.3rem;
     text-decoration-thickness: 0.2rem;
     text-shadow: #ffffff94 0 0 5px;
@@ -261,7 +259,7 @@ nav ul li:hover {
 }
 
 .hero-content h1 .building {
-    color: #4aece9;
+    color: var(--color-blue);
     transition: color 0.5s ease, text-shadow 0.5s ease;
 }
 
@@ -296,10 +294,9 @@ nav ul li:hover {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ---------- BOTÃO PRIMÁRIO ---------- */
 .btn-primary {
-    background-color: #5931e9;
-    color: #ffffff;
+    background-color: var(--color-primary);
+    color: var(--color-white);
     border: none;
     transition: 1s;
 }
@@ -308,21 +305,18 @@ nav ul li:hover {
     background-color: #6d0837;
 }
 
-/* ---------- BOTÃO SECUNDÁRIO (borda giratória) ----------
-   OBS: antes essa regra estava duplicada no arquivo (duas .btn-secondary
-   diferentes brigando pelas mesmas propriedades). Mesclei em uma só. */
 .btn-secondary {
     position: relative;
     background-color: transparent;
-    color: #5931e9;
-    border: 2px solid #5931e9;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
     overflow: hidden;
     z-index: 1;
 }
 
 .btn-secondary:hover {
-    background-color: #5931e9;
-    color: #ffffff;
+    background-color: var(--color-primary);
+    color: var(--color-white);
 }
 
 .btn-secondary::before {
@@ -345,29 +339,42 @@ nav ul li:hover {
 }
 
 .btn-secondary:hover::after {
-    background: #5931e9;
+    background: var(--color-primary);
 }
 
 @keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 /* ======================about me ================== */
 .About {
     text-transform: uppercase;
     font-size: 0.8rem;
-    color: #5931e9;
+    color: var(--color-primary);
 }
 
-.about-description{
-    width: 20%;
+/* CORRIGIDO: era width:20% fixo — em telas pequenas ficava ~60px,
+   quebrando cada palavra numa linha. clamp garante mínimo de 280px */
+.about-description {
+    width: clamp(280px, 40%, 500px);
     margin: 2rem;
+    transition: 1s;
+}
+
+.about-description h1 {
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    /* escala suavemente com a tela */
+    line-height: 1.5;
+}
+
+.about-description samp {
+    font-family: inherit;
+    /* samp usa monospace por padrão — herdar evita a fonte diferente */
+}
+
+.about-description:hover samp {
+    color: var(--color-blue);
 }
 
 .my-esperience {
@@ -378,8 +385,7 @@ nav ul li:hover {
     margin: 0 auto;
 }
 
-/* aqui é a mágica: estiliza os divs filhos direto, sem precisar de classe nova */
-.my-esperience > div {
+.my-esperience>div {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -425,8 +431,8 @@ nav ul li:hover {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px 60px;
-    max-width: 1300px;   /* era 900px, aumentei */
-    width: 90%;          /* usa 90% da largura da tela também */
+    max-width: 1300px;
+    width: 90%;
     margin: 0 auto;
     text-align: left;
 }
@@ -470,12 +476,6 @@ nav ul li:hover {
     transition: width 1s ease;
 }
 
-@media (max-width: 700px) {
-    .Technologies {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* ======================contato==================== */
 #contact {
     display: flex;
@@ -489,10 +489,19 @@ nav ul li:hover {
     color: #7e5bbb;
 }
 
+.contact-heading p {
+    color: var(--color-white);
+    font-size: 1.8rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
+
 #contact .contact-subheading {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
     border-radius: 0.5rem;
     height: 18rem;
     width: 25%;
@@ -505,14 +514,7 @@ nav ul li:hover {
     width: 2rem;
     height: 2rem;
     margin-right: 0.5rem;
-}
-
-.git-img img {
-    background-color: #ffffff;
-    border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
-    margin-right: 0.5rem;
+    vertical-align: middle;
 }
 
 .contact-icons img:hover {
@@ -520,16 +522,35 @@ nav ul li:hover {
 }
 
 #contact .contact-subheading a {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 0rem;
     border-radius: 0.4rem;
-    color: #7e5bbb;
+    color: var(--color-white);
     font-size: 1rem;
-    transition: background-color 0.3s ease;
+    transition: 0.3s;
 }
 
-#contact .contact-subheading a:hover {
-    background-color: #ff0d0d;
+#contact .contact-subheading :hover {
+    text-decoration: underline;
+    color: var(--color-primary);
+}
+
+.contact-subheading a:hover {
+    transform: scale(1.1);
+}
+
+.contact-subheading .whatsapp-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+}
+
+.contact-subheading .whatsapp-line h3 {
+    margin: 0;
+    font-size: 1.1rem;
 }
 
 /* ================================================= */
@@ -632,6 +653,18 @@ footer {
     .my-esperience {
         max-width: 90%;
     }
+
+    /* about-description em tablets */
+    .about-description {
+        width: clamp(240px, 80%, 500px);
+        margin: 1.5rem auto;
+    }
+}
+
+@media (max-width: 700px) {
+    .Technologies {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 600px) {
@@ -675,6 +708,16 @@ footer {
 
     footer {
         padding: 1.5rem;
+    }
+
+    /* about-description em celular */
+    .about-description {
+        width: 95%;
+        margin: 1rem auto;
+    }
+
+    .about-description h1 {
+        font-size: clamp(1rem, 4vw, 1.4rem);
     }
 }
 
