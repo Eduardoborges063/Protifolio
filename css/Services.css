@@ -30,10 +30,11 @@ main {
     left: 2rem;
     z-index: 100;
     transition: color 0.5s ease;
-    
+
 }
+
 .logo h1:hover {
-      color: #7e5bbb;
+    color: #7e5bbb;
 }
 
 header {
@@ -53,17 +54,19 @@ header {
 
     backdrop-filter: blur(8px);
 }
+
 nav {
     font-size: 1.5rem;
-    position: fixed;       
-    top: 1.5rem;            
+    position: fixed;
+    top: 1.5rem;
     left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 100;           
+    z-index: 100;
 }
+
 nav ul {
 
     display: flex;
@@ -71,6 +74,7 @@ nav ul {
     gap: 2.5rem;
 
 }
+
 nav ul li a {
     text-decoration: none;
     color: #d6cbcb;
@@ -78,6 +82,7 @@ nav ul li a {
     cursor: pointer;
     transition: color 0.5s ease;
 }
+
 nav ul li:hover {
     text-decoration: underline;
     text-decoration-color: #7e5bbb;
@@ -86,19 +91,299 @@ nav ul li:hover {
     text-shadow: #ffffff94 0 0 5px;
 
 }
+
 /* ======================================main==================================================== */
-.Good-Services{
-    position: relative;
-    top: 7rem;
-    margin-left: 6rem;
-    min-width: 480px;
-    max-width: 490px;
+
+.Meu_futuro {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
 }
-.Good-Services h3{
-    font-size: 35px;
-    transition: 1.5s;
+
+.Meu_futuro h2 {
+    margin: 2rem;
+    font-size: clamp(2rem, 1rem + 1.5vw, 3.5rem);
 }
-.Good-Services h3 :hover{
-    color: #ff0000;
-    text-shadow: 2px 3px rgb(43, 40, 40);
+
+.Meu_futuro p {
+    font-size: clamp(1rem, 0.85rem + 0.4vw, 1.25rem);
+    margin-top: 2rem;
+    margin-left: 2rem;
+    width: 90%;
+}
+
+/* =========================hero (Good-job)========================= */
+
+.Good-job {
+    position: fixed;
+    gap: 2rem;
+    padding: 4rem 6rem;
+    min-height: 100vh;
+}
+
+.Introducao {
+    position: fixed;
+    top: 50%;
+    left: 75%;
+    transform: translateY(-50%);
+    width: 20%;
+    z-index: 3;
+}
+
+.Introducao h2 {
+    font-size: clamp(1rem, 1.5vw, 1.4rem);
+    line-height: 1.6;
+}
+
+.man {
+    position: fixed;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.man img {
+    height: 770px;
+    width: auto;
+    display: block;
+}
+
+/* =========================galeria de trabalhos========================= */
+
+.Conteudo {
+    margin: 2rem;
+    width: 95%;
+    text-transform: capitalize;
+}
+
+.Conteudo h2 {
+    font-size: clamp(1.0rem, 1.0vw, 2rem);
+    margin-bottom: 1.5rem;
+}
+
+.galeria {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.item-imagem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.item-imagem img {
+    width: 30%;
+    height: auto;
+    margin: 2rem;
+    border-radius: 8%;
+    flex-shrink: 0;
+}
+
+.item-imagem .texto-imagem {
+    width: 30%;
+    margin-top: 0;
+    /* era 4rem fixo, desnecessário agora que o flex alinha verticalmente */
+}
+
+.numero {
+    font-size: 0.85rem;
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.texto-imagem h3 {
+    font-size: clamp(1rem, 1.8vw, 1.4rem);
+    margin-bottom: 0.3rem;
+}
+
+.texto-imagem p {
+    font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+    opacity: 0.6;
+    text-transform: uppercase;
+    width: 60%;
+}
+
+/* ====================== RESPONSIVIDADE ====================== */
+/* Telas grandes (monitores 1600px+, incluindo 2560px) */
+@media (min-width: 1600px) {
+    .Meu_futuro h2 {
+        font-size: clamp(2.5rem, 1.2rem + 1.8vw, 4.5rem);
+    }
+
+    .Meu_futuro p {
+        font-size: clamp(1.1rem, 1rem + 0.3vw, 1.5rem);
+    }
+}
+/* --- Notebooks grandes / monitores menores --- */
+@media (max-width: 1280px) {
+    .man img {
+        height: 620px;
+    }
+
+    .Introducao {
+        left: 72%;
+        width: 24%;
+    }
+
+    nav ul {
+        gap: 1.8rem;
+    }
+
+    nav {
+        font-size: 1.2rem;
+    }
+}
+
+/* --- Notebooks / tablets landscape --- */
+@media (max-width: 1024px) {
+
+    /* hero: sai do fixed e empilha verticalmente */
+    .Good-job {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        min-height: auto;
+    }
+
+    .Introducao {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 80%;
+        text-align: center;
+        order: 1;
+    }
+
+    .man {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        order: 2;
+    }
+
+    .man img {
+        height: 500px;
+    }
+
+    /* galeria */
+    .item-imagem img {
+        width: 40%;
+    }
+
+    .item-imagem .texto-imagem {
+        width: 50%;
+    }
+
+    nav ul {
+        gap: 1.4rem;
+    }
+}
+
+/* --- Tablets portrait --- */
+@media (max-width: 768px) {
+    nav {
+        font-size: 1rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0 1rem;
+    }
+
+    header {
+        padding: 1rem;
+    }
+
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+
+    .man img {
+        height: 400px;
+    }
+
+    .Introducao {
+        width: 90%;
+    }
+
+    /* galeria empilha imagem em cima do texto */
+    .item-imagem {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .item-imagem img {
+        width: 80%;
+        margin: 1rem auto;
+        border-radius: 12px;
+    }
+
+    .item-imagem .texto-imagem {
+        width: 90%;
+        margin: 0 auto 1.5rem;
+        text-align: center;
+    }
+}
+
+/* --- Celulares grandes --- */
+@media (max-width: 600px) {
+    .man img {
+        height: 320px;
+    }
+
+    .Introducao {
+        width: 95%;
+    }
+
+    .Conteudo {
+        margin: 1rem;
+        width: 100%;
+    }
+
+    .item-imagem img {
+        width: 95%;
+        margin: 0.5rem auto;
+    }
+
+    .item-imagem .texto-imagem {
+        width: 95%;
+    }
+
+    .logo h1 {
+        font-size: 1rem;
+        top: 1rem;
+        left: 1rem;
+    }
+}
+
+/* --- Celulares pequenos --- */
+@media (max-width: 480px) {
+    nav ul {
+        gap: 0.6rem;
+        font-size: 0.85rem;
+    }
+
+    .man img {
+        height: 260px;
+    }
+
+    .Good-job {
+        padding: 1rem;
+    }
+
+    .Introducao h2 {
+        font-size: 1rem;
+    }
 }
